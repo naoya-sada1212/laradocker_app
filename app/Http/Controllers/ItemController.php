@@ -76,9 +76,10 @@ class ItemController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Item $item)
     {
-        //
+        $user = Auth::user();
+        return view('items.edit',['item' => $item,'user' => $user]);
     }
 
     /**
@@ -88,9 +89,21 @@ class ItemController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Item $item)
     {
-        //
+        $user = auth()->user();
+        $data = $request->all();
+        $validator = Validator::make($data,[
+            'item_name' => 'required|string|max:100',
+            'text' => 'required|string|max:255',
+            'pref' => 'required|string',
+            'city' => 'required|string',
+            'item_image' => 'required|file|image|mimes:jpeg,png,jpg|max:2048',
+        ]);
+        $validator->validate();
+        $item->itemUpdate($user->id,$data);
+        
+        return redirect('items');
     }
 
     /**
