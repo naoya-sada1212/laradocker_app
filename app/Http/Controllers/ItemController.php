@@ -78,7 +78,7 @@ class ItemController extends Controller
      */
     public function edit(Item $item)
     {
-        $user = Auth::user();
+        $user = auth()->user();
         return view('items.edit',['item' => $item,'user' => $user]);
     }
 
@@ -112,8 +112,11 @@ class ItemController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Item $item)
     {
-        //
+        $user = auth()->user();
+        $item->deleteItem($item->id,$user->id);
+
+        return back();
     }
 }
