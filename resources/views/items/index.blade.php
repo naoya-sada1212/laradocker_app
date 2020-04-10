@@ -22,6 +22,28 @@
             <p>{{$item->pref}} {{ $item->city }}</p>
           </div>
         </div>
+        @if($item->user->id === Auth::user()->id)
+          <div class="card-footer d-flex justify-content-end">
+            <div class="dropdown mr-3 d-flex align-items-center">
+              <a href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <i class="fas fa-ellipsis-v fa-fw"></i>
+              </a>
+              <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                <form method="POST" action="{{ url('items/'.$item->id) }}" class="mb-0">
+                  @csrf
+                  @method('DELETE')
+                  
+                  <a href="{{ url('items/'.$item->id .'/edit') }}" class="dropdown-item">編集</a>
+                  <button type="submit" class="dropdown-item del-btn">削除</button>
+                </form>
+              </div>
+            </div>
+          </div>
+          @else
+          <div class="card-footer d-flex justify-content-end">
+            <a href="{{ url('items/'.$item->id) }}" class="btn btn-primary">詳細</a>
+          </div>
+        @endif
       </div>
     </div>
     @endforeach
