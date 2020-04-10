@@ -17,7 +17,7 @@ class ItemController extends Controller
      */
     public function index(Item $item)
     {
-        $items = $item->paginate(6);
+        $items = $item->orderBy('created_at','desc')->paginate(6);
 
         return view('items.index',['items' => $items]);
     }
@@ -62,9 +62,12 @@ class ItemController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Item $item)
     {
-        //
+        $items = $item->where('id',$item->id)->get();
+        //dd($items);
+        //return view('sample');
+        return view('items.show',['items' => $items]);
     }
 
     /**
