@@ -101,7 +101,7 @@ class ItemController extends Controller
             'item_image' => 'required|file|image|mimes:jpeg,png,jpg|max:2048',
         ]);
         $validator->validate();
-        $item->itemUpdate($user->id,$data);
+        $item->itemStore($user->id,$data);
         
         return redirect('items');
     }

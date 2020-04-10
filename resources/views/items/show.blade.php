@@ -22,7 +22,7 @@
           </div>
         </div>
         <div class="card-footer d-flex justify-content-end">
-          <a href="{{ url('items/') }}">一覧へ</a>
+          <a href="{{ url('items/') }}">???</a>
         </div>
       </div>
     </div>

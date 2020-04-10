@@ -3,6 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
+use App\User;
+use App\Item;
 
 class UserController extends Controller
 {
@@ -13,7 +16,7 @@ class UserController extends Controller
      */
     public function index()
     {
-        //
+        
     }
 
     /**
@@ -43,9 +46,12 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(User $user, Item $item)
     {
-        //
+        $items = $item->where('user_id',$user->id)->orderBy('created_at','desc')->paginate(6);
+        //dd($items);
+
+        return view('users.show',['user' => $user,'items' => $items]);
     }
 
     /**
@@ -54,9 +60,10 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(User $user)
     {
-        //
+        return view('users.edit',['user' => $user]);
+        
     }
 
     /**
@@ -66,9 +73,19 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, User $user)
     {
-        //
+        $data = $request->all();
+        $varidator = Validator::make($data,[
+            'name' => 'required|string|max:100',
+            'account_name' => 'required|max:100',
+            'image' => 'file|image|mimes:jpeg,png,jpg|max:2048'
+        ]);
+        $varidator->validate();
+        $user->userUpdate($data);
+
+        return redirect('users/'.$user->id);
+
     }
 
     /**
