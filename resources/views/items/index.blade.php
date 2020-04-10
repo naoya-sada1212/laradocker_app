@@ -6,10 +6,10 @@
     <div class="col-md-5 m-3">
       <div class="card">
         <div class="card-header p-3 w-100 d-flex">
-          <img src="{{ $item->user->image }}" class="rounded-circle" width="50" height="50">
+          <img src="{{ asset('storage/image/'.$item->user->image) }}" class="rounded-circle" width="50" height="50">
           <div class="ml-2 d-flex flex-column">
             <p class="mb-0">{{ $item->user->name }}</p>
-            <p class="mb-0">{{ $item->user->account_name }}</p>
+            <a href="{{ url('users/'.$item->user->id) }}" class="mb-0">{{ $item->user->account_name }}</a>
           </div>
         </div>
 

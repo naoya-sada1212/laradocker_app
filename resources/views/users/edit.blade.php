@@ -5,7 +5,7 @@
     <div class="col-md-8">
       <div class="card">
         <div class="card-header p-3 d-flex">
-          <img src="{{ $user->image }}" class="rounded-circle" width="50" height="50">
+          <img src="{{ asset('storage/image/'.$user->image) }}" class="rounded-circle" width="50" height="50">
           <div class="ml-2 d-flex flex-column">
             <p class="mb-0">{{ $user->name }}</p>
             <p class="mb-0">{{ $user->account_name }}</p>
@@ -21,12 +21,7 @@
         <div class="form-group row align-items-center">
           <lavel for="image" class="col-md-4 col-form-label text-md-right">写真</lavel>
           <div class="col-md-6 align-items-center">
-            <input type="file" name="image" class="@error('image') is-invalid @enderror" autocomplete="image">
-            @error('image')
-              <span class="invalid-feedback" role="alert">
-                <strong>{{ $message }}</strong>
-              </span>
-            @enderror
+            <input type="file" name="image" autocomplete="image">
           </div>
         </div>
 
