@@ -5,7 +5,11 @@
     <div class="col-md-8">
       <div class="card">
         <div class="card-header p-3 d-flex">
+          @if($user->image == NULL)
+          <img src="8.png" class="rounded-circle" width="50" height="50">
+          @else
           <img src="{{ asset('storage/image/'.$user->image) }}" class="rounded-circle" width="50" height="50">
+          @endif
           <div class="ml-2 d-flex flex-column">
             <p class="mb-0">{{ $user->name }}</p>
             <p class="mb-0">{{ $user->account_name }}</p>

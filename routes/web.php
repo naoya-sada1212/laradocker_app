@@ -27,4 +27,6 @@ Route::group([ 'middleware' => 'auth'] ,function()
     Route::resource('items','ItemController');
 
     Route::resource('users','UserController');
+
+    Route::resource('comments','CommentController');
 }); 

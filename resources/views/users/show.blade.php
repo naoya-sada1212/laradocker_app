@@ -10,8 +10,12 @@
           <a href="{{ url('users/'.$user->id.'/edit') }}" class="btn btn-primary ml-5">編集</a>
           @endif
         </div>
-        <div class="card-body d-flex">
+        <div class="card-header p-3 d-flex">
+          @if($user->image == null)
+          <img src="8.png" class="rounded-circle" width="80" height="80">
+          @else
           <img src="{{ asset('storage/image/'.$user->image) }}" class="rounded-circle" width="80" height="80">
+          @endif
           <div class="ml-2 mt-2 d-flex flex-column">
             <div class="row justify-content-end">
               <p class="mb-3 ml-5">名前：</p>

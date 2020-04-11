@@ -54,8 +54,11 @@ class User extends Authenticatable
                 'image' => basename($file_name)
             ]);
         } else {
+            //$file_name = $data['image']->store('public/image/8.png');
+            //$data['image'] = '8.png';
             $this::where('id',$this->id)
             ->update([
+                //'image' => basename($file_name),
                 'name' => $data['name'],
                 'account_name' => $data['account_name'],
             ]);
