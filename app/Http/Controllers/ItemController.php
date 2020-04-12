@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 use App\Item;
 use App\User;
+use App\Comment;
 
 class ItemController extends Controller
 {
@@ -62,12 +63,13 @@ class ItemController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show(Item $item)
+    public function show(Item $item, Comment $comment)
     {
-        $items = $item->where('id',$item->id)->get();
-        //dd($items);
-        //return view('sample');
-        return view('items.show',['items' => $items]);
+        $user = auth()->user();
+        $item = $item->with('user')->where('id',$item->id)->first();
+        $comments = $comment->with('user')->where('id',$item->id)->get();
+        
+        return view('items.show',['item' => $item,'user'=>$user,'comments'=> $comments]);
     }
 
     /**

@@ -40,8 +40,8 @@ class CommentController extends Controller
         $user = auth()->user();
         $data = $request->all();
         $validator = Validator::make($data,[
-            'item_id' => 'require|integer',
-            'text' => 'require|string|max:255',
+            'item_id' => 'required|integer',
+            'text' => 'required|string|max:140',
         ]);
         $validator->validate();
         $comment->commentStore($user->id,$data);

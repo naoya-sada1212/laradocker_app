@@ -22,7 +22,7 @@ class Comment extends Model
 
     public function commentStore(Int $user_id,Array $data)
     {
-        $this->user_id = $data['user_id'];
+        $this->user_id = $user_id;
         $this->item_id = $data['item_id'];
         $this->text = $data['text'];
         $this->save();

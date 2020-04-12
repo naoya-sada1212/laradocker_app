@@ -14,15 +14,16 @@
         </div>
 
         <div class="card-body d-flex">
-          <img src="{{ asset('storage/item_image/'.$item->item_image) }}" class="col-align-self-center" width="200" height="200">
+          <img src="{{ asset('storage/item_image/'.$item->item_image) }}" class="col-7" width="200" height="200">
           <div class="ml-2 d-flex flex-column">
-            <p class="mb-0">{{ $item->item_name }}</p>
-            <p class="mb-0">{{ $item->text}}</p>
+            <h3 class="mb-0 mb-2">{{ $item->item_name }}</h3>
+            <p class="mb-0 mb-3">{{ $item->text}}</p>
             <p>{{$item->pref}}県 {{ $item->city }}市</p>
           </div>
         </div>
+        <div class="card-footer d-flex justify-content-end">
+          <div class="col text-end text-secondary">{{ $item->created_at->format('Y-m-d') }}</div>
         @if($item->user->id === Auth::user()->id)
-          <div class="card-footer d-flex justify-content-end">
             <div class="dropdown mr-3 d-flex align-items-center">
               <a href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 <i class="fas fa-ellipsis-v fa-fw"></i>
@@ -37,12 +38,10 @@
                 </form>
               </div>
             </div>
-          </div>
-          @else
-          <div class="card-footer d-flex justify-content-end">
+            @else
             <a href="{{ url('items/'.$item->id) }}" class="btn btn-primary">詳細</a>
-          </div>
         @endif
+        </div>
       </div>
     </div>
     @endforeach

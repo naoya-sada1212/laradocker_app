@@ -1,9 +1,8 @@
 @extends('layouts.app')
 @section('content')
 <div class="container">
-  <div class="row justify-content-center">
-    @foreach($items as $item)
-    <div class="col-md-8 m-4">
+  <div class="flex-wrap d-flex flex-row">
+    <div class="col-md-5 m-3">
       <div class="card">
         <div class="card-header p-3 w-100 d-flex">
           <img src="{{ asset('storage/image/'.$item->user->image) }}" class="rounded-circle" width="50" height="50">
@@ -13,72 +12,70 @@
           </div>
         </div>
 
-        <div class="card-body">
-          <img src="{{ asset('storage/item_image/'.$item->item_image) }}" class="col-md-12" width="200" height="200">
+        <div class="card-body d-flex">
+          <img src="{{ asset('storage/item_image/'.$item->item_image) }}" class="col align-self-center" width="200" height="200">
           <div class="ml-2 d-flex flex-column">
             <p class="mb-0">{{ $item->item_name }}</p>
             <p class="mb-0">{{ $item->text}}</p>
-            <p>{{$item->pref}} {{ $item->city }}</p>
+            <p>{{$item->pref}}? {{ $item->city }}?</p>
           </div>
         </div>
         <div class="card-footer d-flex justify-content-end">
-          <a href="{{ url('items/') }}">一覧㝸</a>
+          <div class="col text-end text-secondary">{{ $item->created_at->format('Y-m-d') }}</div>
+          <a href="{{ url('items/') }}">???</a>
         </div>
       </div>
     </div>
-    @endforeach
-  </div>
 
- {{--<div class="row justify-content-center">
-    <div class="col-md-8 m-4">
-      @if(isset($comments))
-      @foreach($comments as $comment)
-      <div class="card">
-        <div class="card-header p-3 w-100 d-flex">
-          <img src="{{ asset('storage/image/'.$comment->user->image) }}" class="rounded-circle" width="50" height="50">
-          <div class="ml-2 d-flex flex-column">
-            <p class="mb-0">{{ $comment->user->name }}</p>
-            <p class="mb-0">{{ $comment->user->account_name }}</p>
-          </div>
-        </div>
+      <div class="col-md-5 m-3">
+        <ul class="list-group">
+          <p>????</p>
+          @forelse($comments as $comment)
+            <li class="-list-group-item card">
+              <div class="py-3 w-100 d-flex mx-2">
+                <img src="{{ asset('storage/image/'.$comment->user->image) }}" class="rounded-circle" width="50" height="50">
+                <div class="ml-2 d-flex flex-column">
+                  <p class="mb-0">{{ $comment->user->name }}</p>
+                  <p class="mb-0">{{ $comment->user->account_name }}</p>
+                </div>
+              </div>
+              <div class="py-3 mx-2">
+                {!! nl2br(e($comment->text)) !!}
+              </div>
+              <div class="text-secondary m-2">{{ $comment->created_at->format('Y-m-d H:i') }}</div>
+            </li>
+          @empty
+          <li class="list-group-item">
+            <p class="mb-0 text-secondary">????????????</p>
+          </li>
+          @endforelse
+          <li class="list-group-item">
+            <div class="py-3">
+              <form method="POST" action="{{ route('comments.store') }}">
+                @csrf
+                <div class="form-group row mb-0">
+                  <div class="col-md-12 mt-2">
+                    <input type="hidden" name="item_id" value="{{ $item->id }}">
+                    <textarea name="text" class="form-control @error('text') is-invalid @enderror" required autocomplete="text" rows="4">{{ old('text') }}</textarea>
+                    @error('text')
+                    <span class="invalid-feedback" role="alert">
+                      <strong>{{ $message }}</strong>
+                    </span>
+                    @enderror
+                  </div>
+                </div>
+                <div class="form-group row mb-0">
+                  <div class="col-md-12 text-right">
+                    <p class="mb-4 text-danger">140????</p>
+                    <button type="submit" class="btn btn-primary">??????</button>
+                  </div>
+                </div>
+              </form>
+            </div>
+          </li>
+        </ul>
       </div>
-
-      <div class="card-body">
-        <p>{{ $comment->text }}</p>
-      </div>
-      @endforeach
-      @else
-      <p>????????????</p>
-      @endif
-    </div>
+   
   </div>
-  
-  
-  <div class="row justify-content-center">
-    <div class="col-md-8 m-4">
-      <div class="card">
-        <div class="card-header p-3 w-100 d-flex">
-          <img src="{{ asset('storage/image/'.$user->image) }}" class="rounded-circle" width="50" height="50">
-          <div class="ml-2 d-flex flex-column">
-            <p class="mb-0">{{ $user->name }}</p>
-            <p class="mb-0">{{ $user->account_name }}</p>
-          </div>
-        </div>
-      </div>
-      <div class="card-body">
-        <form method="POST" action="{{ url('comments.store') }}">
-          @scrf
-          
-          <input type="hidden" name="item_id" value="{{ $items->id }}">
-          <textarea name="text" class="col-md-8 @error('text') is-invalid @enderror" required autocomplete="text" rows="4">{{ old('text') }}</textarea>
-          @error('text')
-          <span class="invalid-feedback" role="alert">
-            <strong>{{ $message }}</strong>
-          </span>
-          @enderror
-          <button type="submit" class="btn btn-primary">??????</button>
-        </form>
-      </div>--}}
-  
 </div>
-@endsection
+  @endsection
