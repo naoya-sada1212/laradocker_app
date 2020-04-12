@@ -2,12 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Comment;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Validator;
-use App\User;
 use App\Item;
+use Illuminate\Support\Facades\Validator;
 
-class UserController extends Controller
+class CommentController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -16,7 +16,7 @@ class UserController extends Controller
      */
     public function index()
     {
-        
+        //
     }
 
     /**
@@ -35,9 +35,18 @@ class UserController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Request $request,Comment $comment)
     {
-        //
+        $user = auth()->user();
+        $data = $request->all();
+        $validator = Validator::make($data,[
+            'item_id' => 'require|integer',
+            'text' => 'require|string|max:255',
+        ]);
+        $validator->validate();
+        $comment->commentStore($user->id,$data);
+
+        return back();
     }
 
     /**
@@ -46,12 +55,9 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show(User $user, Item $item)
+    public function show($id)
     {
-        $items = $item->where('user_id',$user->id)->orderBy('created_at','desc')->paginate(6);
-        //dd($items);
-
-        return view('users.show',['user' => $user,'items' => $items]);
+        //
     }
 
     /**
@@ -60,10 +66,9 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit(User $user)
+    public function edit($id)
     {
-        return view('users.edit',['user' => $user]);
-        
+        //
     }
 
     /**
@@ -73,24 +78,9 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, User $user)
+    public function update(Request $request, $id)
     {
-        $data = $request->all();
-        if($user->image == null)
-        {
-            $data['image'] = '8.png';
-        }
-        $varidator = Validator::make($data,[
-            'name' => 'required|string|max:100',
-            'account_name' => 'required|max:100',
-            'image' => 'file|image|mimes:jpeg,png,jpg|max:2048'
-        ]);
-        $varidator->validate();
-        $user->userUpdate($data);
-        //dd($user);
-        //return view('sample');
-        return redirect('users/'.$user->id)->with('user',$user);
-
+        //
     }
 
     /**

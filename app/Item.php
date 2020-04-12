@@ -35,5 +35,10 @@ class Item extends Model
         return;
     }
 
+    public function deleteItem(Int $item_id, Int $user_id)
+    {
+        return $this->where('id',$item_id)->where('user_id',$user_id)->delete();
+    }
+
 
 }

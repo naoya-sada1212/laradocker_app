@@ -14,8 +14,9 @@
       </div>
     </div>
     <div class="card-body">
-      <form action="{{ route('items.store') }}" method="POST" enctype="multipart/form-data">
+      <form action="{{ url('items/'.$item->id) }}" method="POST" enctype="multipart/form-data">
         @csrf
+        @method('PUT')
         
         <div class="form-group row align-items-center">
           <lavel for="item_image" class="col-md-4 col-form-label text-md-right">写真</lavel>
@@ -32,7 +33,7 @@
         <div class="form-group row">
           <lavel for="item_name" class="col-md-4 col-form-label text-md-right">落とし物名</lavel>
           <div class="col-md-6 align-items-center"h>
-            <input type="text" name="item_name" class="@error('item_name') is-invalid @enderror" autocomplete="item_name">
+            <input type="text" name="item_name" class="@error('item_name') is-invalid @enderror" autocomplete="item_name" value="{{ old('item_name') }}">
             @error('item_name')
               <span class="invalid-feedback" role="alert">
                 <strong>{{ $message }}</strong>
@@ -56,14 +57,14 @@
         <div class="form-group row">
           <lavel for="pref" class="col-md-4 col-form-label text-md-right">場所</lavel>
           <div class="col-md-6 align-items-center d-flex">
-            <input type="text" name="pref" class="@error('pref') is-invalid @enderror" autocomplete="pref">県
+            <input type="text" name="pref" class="@error('pref') is-invalid @enderror" autocomplete="pref" value="{{ old('pref') }}">県
             @error('pref')
               <span class="invalid-feedback" role="alert">
                 <strong>{{ $message }}</strong>
               </span>
             @enderror
             <div class="col-md-6 align-items-center">
-              <input type="text" name="city" class="@error('city') is-invalid @enderror" autocomplete="city">市
+              <input type="text" name="city" class="@error('city') is-invalid @enderror" autocomplete="city" value="{{ old('city') }}">市
               @error('city')
                 <span class="invalid-feedback" role="alert">
                   <strong>{{ $message }}</strong>

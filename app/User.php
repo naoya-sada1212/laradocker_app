@@ -42,4 +42,28 @@ class User extends Authenticatable
         return $this->hasMany(Item::class);
     }
 
+    public function userUpdate( Array $data)
+    {
+        if(isset($data['image'])) {
+            $file_name = $data['image']->store('public/image/');
+
+            $this::where('id',$this->id)
+            ->update([
+                'name' => $data['name'],
+                'account_name' => $data['account_name'],
+                'image' => basename($file_name)
+            ]);
+        } else {
+            //$file_name = $data['image']->store('public/image/8.png');
+            //$data['image'] = '8.png';
+            $this::where('id',$this->id)
+            ->update([
+                //'image' => basename($file_name),
+                'name' => $data['name'],
+                'account_name' => $data['account_name'],
+            ]);
+        }
+
+        return;
+    }
 }
