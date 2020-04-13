@@ -66,8 +66,8 @@ class ItemController extends Controller
     public function show(Item $item, Comment $comment)
     {
         $user = auth()->user();
-        $item = $item->with('user')->where('id',$item->id)->first();
-        $comments = $comment->with('user')->where('id',$item->id)->get();
+        $item = $item->getItem($item->id);
+        $comments = $comment->getComment($item->id);
         
         return view('items.show',['item' => $item,'user'=>$user,'comments'=> $comments]);
     }

@@ -56,7 +56,7 @@
               </div>
             </div>
             <div class="card-footer d-flex justify-content-end">
-              <a href="{{ url('items/') }}">一覧へ</a>
+              <div class="col text-end text-secondary">{{ $item->created_at->format('Y-m-d') }}</div>
             </div>
           </div>
         </div>

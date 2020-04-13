@@ -28,7 +28,7 @@
 
       <div class="col-md-5 m-3">
         <ul class="list-group">
-          <p>コメント一覧</p>
+          <p>allcomment</p>
           @forelse($comments as $comment)
             <li class="-list-group-item card">
               <div class="py-3 w-100 d-flex mx-2">
@@ -45,7 +45,7 @@
             </li>
           @empty
           <li class="list-group-item">
-            <p class="mb-0 text-secondary">まだコメントはありません</p>
+            <p class="mb-0 text-secondary">NOCOMMENT</p>
           </li>
           @endforelse
           <li class="list-group-item">
@@ -65,8 +65,8 @@
                 </div>
                 <div class="form-group row mb-0">
                   <div class="col-md-12 text-right">
-                    <p class="mb-4 text-danger">140以内</p>
-                    <button type="submit" class="btn btn-primary">コメントする</button>
+                    <p class="mb-4 text-danger">140??</p>
+                    <button type="submit" class="btn btn-primary">??????</button>
                   </div>
                 </div> 
               </form>
@@ -77,3 +77,4 @@
   </div>
 </div>
   @endsection
+  

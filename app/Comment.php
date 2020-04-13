@@ -20,6 +20,11 @@ class Comment extends Model
         return $this->belongsTo(Item::class);
     }
 
+    public function getComment(Int $item_id)
+    {
+        return $this->with('user')->where('item_id',$item_id)->get();
+    }
+
     public function commentStore(Int $user_id,Array $data)
     {
         $this->user_id = $user_id;
