@@ -21,6 +21,16 @@ class Item extends Model
         return $this->belongsTo(User::class);
     }
 
+    public function comment()
+    {
+        return $this->hasMany(Comment::class);
+    }
+
+    public function getItem(Int $item_id)
+    {
+        return $this->with('user')->where('id',$item_id)->first();
+    }
+
     public function itemStore(Int $user_id, Array $data)
     {
         $file_name = $data['item_image']->store('public/item_image/');

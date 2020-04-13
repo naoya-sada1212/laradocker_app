@@ -42,6 +42,11 @@ class User extends Authenticatable
         return $this->hasMany(Item::class);
     }
 
+    public function comment()
+    {
+        return $this->hasMany(Comment::class);
+    }
+
     public function userUpdate( Array $data)
     {
         if(isset($data['image'])) {
