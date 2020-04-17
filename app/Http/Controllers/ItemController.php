@@ -121,4 +121,23 @@ class ItemController extends Controller
 
         return back();
     }
+
+    public function keyword(Request $request, Item $item)
+    {
+        $keyword = $request->keyword;
+        //dd($keyword);
+        if($keyword != '')
+        {
+            $items = $item
+            ->where('pref','like',$keyword)
+            ->orwhere('city','like',$keyword)
+            ->paginate(6);
+        } else {
+            return back();
+        }
+        //dd($items);
+
+
+        return view('items.keyword',['keyword' =>  $keyword,'items' => $items]);
+    }
 }
