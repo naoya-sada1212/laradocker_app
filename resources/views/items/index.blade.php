@@ -1,10 +1,24 @@
 @extends('layouts.app')
+<!-- <style>
+  .pagetop {
+    /* display: none; */
+    padding: 40px 10px;
+    background-color: #d8d8d8;
+    color: #000;
+    text-decoration: none;
+    border-radius: 50%;
+    position: fixed;
+    bottom: 10px;
+    right: 50px;
+  }
+</style>   -->
 @section('content')
 <div class="container">
-<form class="form-inline" action="keyword" method="POST">
+  <p class="mb-0">場所で探す（県・市名を入力してください）</p>
+  <form class="form-inline" action="keyword" method="POST">
     @csrf
-    <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" name="keyword">
-    <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+    <input class="form-control mr-sm-2" type="search" placeholder="県または市名を入力" aria-label="Serch" name="keyword">
+    <button class="btn btn-outline-success my-2 my-sm-0" type="submit">検索</button>
   </form>
   <div class="flex-wrap d-flex flex-row">
     @foreach($items as $item)
@@ -53,6 +67,20 @@
   </div>
   <div class="text-center" style="width: 200px;margin: 20px auto;">
       {{ $items->links() }}
+      <!-- <a class="pagetop"  id="top" href="#" text-content-end>ページトップへ</a> -->
   </div>
 </div>
+<!-- <script>
+  const top = document.getElementById('top');
+  const scrollValue = document.scrollingElement.scrollTop;
+  top.addEventListener('click', () => {
+    const timer = setInterval( () => {
+      if(scrollValue < 0) clearInterval(timer);
+
+        document.scrollingElement.scrollTop = scrollValue;
+        scrollValue = scrollValue - 10;  
+    });
+  });
+  
+</script> -->
 @endsection
