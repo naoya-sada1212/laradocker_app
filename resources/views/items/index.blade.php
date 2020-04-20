@@ -21,7 +21,7 @@
     <button class="btn btn-outline-success my-2 my-sm-0" type="submit">検索</button>
   </form>
   <div class="flex-wrap d-flex flex-row">
-    @foreach($items as $item)
+    @forelse($items as $item)
     <div class="col-md-5 m-3">
       <div class="card">
         <div class="card-header p-3 w-100 d-flex">
@@ -63,7 +63,9 @@
         </div>
       </div>
     </div>
-    @endforeach
+    @empty
+    <h3 class="col text-center m-5">まだ投稿がありません</h3>
+    @endforelse
   </div>
   <div class="text-center" style="width: 200px;margin: 20px auto;">
       {{ $items->links() }}
