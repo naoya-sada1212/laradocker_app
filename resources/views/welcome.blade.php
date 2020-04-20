@@ -6,8 +6,6 @@
       <div class="lead">みんなんで落とし物を探そう</div>
     </div>
   </div>
-  <div id="app">
-    <example-component></example-component>
-  </div>
+  
 
 @endsection
