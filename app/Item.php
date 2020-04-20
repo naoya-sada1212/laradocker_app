@@ -33,13 +33,14 @@ class Item extends Model
 
     public function itemStore(Int $user_id, Array $data)
     {
-        $file_name = $data['item_image']->store('public/item_image/');
+        //$file_name = $data['item_image']->store('public/item_image/');
         $this->user_id = $user_id;
         $this->item_name = $data['item_name'];
         $this->text = $data['text'];
         $this->pref = $data['pref'];
         $this->city = $data['city'];
-        $this->item_image = basename($file_name);
+        $this->item_image = base64_encode(file_get_contents($data['item_image']));
+        //$this->item_image = basename($file_name);
         $this->save();
 
         return;

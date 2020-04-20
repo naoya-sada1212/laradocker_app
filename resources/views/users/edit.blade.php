@@ -8,7 +8,7 @@
           @if($user->image == NULL)
           <img src="8.png" class="rounded-circle" width="50" height="50">
           @else
-          <img src="{{ asset('storage/image/'.$user->image) }}" class="rounded-circle" width="50" height="50">
+          <img src="data:image/png;base64,{{ $user->user_image }}" class="rounded-circle" width="50" height="50">
           @endif
           <div class="ml-2 d-flex flex-column">
             <p class="mb-0">{{ $user->name }}</p>
@@ -23,9 +23,9 @@
         @method('PUT')
         
         <div class="form-group row align-items-center">
-          <lavel for="image" class="col-md-4 col-form-label text-md-right">写真</lavel>
+          <lavel for="user_image" class="col-md-4 col-form-label text-md-right">写真</lavel>
           <div class="col-md-6 align-items-center">
-            <input type="file" name="image" autocomplete="image">
+            <input type="file" name="user_image" autocomplete="user_image">
           </div>
         </div>
 

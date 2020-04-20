@@ -49,14 +49,15 @@ class User extends Authenticatable
 
     public function userUpdate( Array $data)
     {
-        if(isset($data['image'])) {
-            $file_name = $data['image']->store('public/image/');
-
+        if(isset($data['user_image'])) {
+            //$file_name = $data['image']->store('public/image/');
+            $user_image = base64_encode(file_get_contents($data['user_image']));
             $this::where('id',$this->id)
-            ->update([
+            ->update([          
                 'name' => $data['name'],
                 'account_name' => $data['account_name'],
-                'image' => basename($file_name)
+                'user_image' => $user_image,
+                //'image' => basename($file_name)
             ]);
         } else {
             //$file_name = $data['image']->store('public/image/8.png');

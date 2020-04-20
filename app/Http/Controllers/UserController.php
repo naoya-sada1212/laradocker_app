@@ -83,7 +83,7 @@ class UserController extends Controller
         $varidator = Validator::make($data,[
             'name' => 'required|string|max:100',
             'account_name' => 'required|max:100',
-            'image' => 'file|image|mimes:jpeg,png,jpg|max:2048'
+            'user_image' => 'file|image|mimes:jpeg,png,jpg|max:2048'
         ]);
         $varidator->validate();
         $user->userUpdate($data);

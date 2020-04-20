@@ -11,11 +11,11 @@
           @endif
         </div>
         <div class="card-header p-3 d-flex">
-          @if($user->image == null)
+          <img src="data:image/png;base64,{{ $user->user_image }}" class="rounded-circle" width="80" height="80">
+          <!-- @if($user->image == null)
           <img src="8.png" class="rounded-circle" width="80" height="80">
-          @else
-          <img src="{{ asset('storage/image/'.$user->image) }}" class="rounded-circle" width="80" height="80">
-          @endif
+          @else -->
+          <!-- @endif -->
           <div class="ml-2 mt-2 d-flex flex-column">
             <div class="row justify-content-end">
               <p class="mb-3 ml-5">名前：</p>
@@ -40,7 +40,7 @@
         <div class="col-md-5 m-3">
           <div class="card">
             <div class="card-header p-3 w-100 d-flex">
-              <img src="{{ asset('storage/image/'.$item->user->image) }}" class="rounded-circle" width="50" height="50">
+              <img src="data:image/png;base64,{{ $item->user->user_image }}" class="rounded-circle" width="50" height="50">
               <div class="ml-2 d-flex flex-column">
                 <p class="mb-0">{{ $item->user->name }}</p>
                 <p class="mb-0">{{ $item->user->account_name }}</p>
@@ -48,7 +48,7 @@
             </div>
     
             <div class="card-body d-flex">
-              <img src="{{ asset('storage/item_image/'.$item->item_image) }}" class="col-align-self-center" width="200" height="200">
+              <img src="data:image/png;base64,{{ $item->item_image }}" class="col-align-self-center" width="200" height="200">
               <div class="ml-2 d-flex flex-column">
                 <p class="mb-0">{{ $item->item_name }}</p>
                 <p class="mb-0">{{ $item->text}}</p>

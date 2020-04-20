@@ -18,7 +18,7 @@ class CreateItemsTable extends Migration
             $table->unsignedInteger('user_id')->comment('ユーザーID');
             $table->string('item_name')->null()->comment('アイテム名');
             $table->string('text');
-            $table->string('item_image')->comment('アイテム画像');
+            $table->text('item_image')->comment('アイテム画像');
             $table->string('pref')->comment('県');
             $table->string('city')->comment('市');
             $table->softDeletes();
