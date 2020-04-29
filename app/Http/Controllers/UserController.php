@@ -76,9 +76,9 @@ class UserController extends Controller
     public function update(Request $request, User $user)
     {
         $data = $request->all();
-        if($user->image == null)
+        if('user_image'== null)
         {
-            $data['image'] = '8.png';
+            $data['user_image'] = '8.png';
         }
         $varidator = Validator::make($data,[
             'name' => 'required|string|max:100',

@@ -50,7 +50,7 @@ class RegisterController extends Controller
     protected function validator(array $data)
     {
         return Validator::make($data, [
-            'user_image' => ['file','image', 'mimes:jpeg,png,jpg','max:2048'],
+            //'user_image' => ['file','image', 'mimes:jpeg,png,jpg','max:2048'],
             'account_name' => ['required','string','max:255','unique:users'],
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
@@ -67,8 +67,8 @@ class RegisterController extends Controller
     protected function create(array $data)
     {
         //$file_name =$data['image']->store('public/image/');
-        $user_image = base64_encode(file_get_contents($data['user_image']));
-        if(isset($data['user_image'])) {
+            $data['user_image'] = '8.png';
+            $user_image = base64_encode(file_get_contents($data['user_image']));
             return User::create([
                 //'image' => basename($file_name),
                 'user_image' => $user_image,
@@ -77,14 +77,6 @@ class RegisterController extends Controller
                 'email' => $data['email'],
                 'password' => Hash::make($data['password']),
             ]);
-        } else {
-            return User::create([
-                'account_name' => $data['account_name'],
-                'name' => $data['name'],
-                'email' => $data['email'],
-                'password' => Hash::make($data['password']),
-            ]);
-        }
     }
     public function redirectPath()
     {

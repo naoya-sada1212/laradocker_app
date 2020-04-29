@@ -1,17 +1,4 @@
 @extends('layouts.app')
-<!-- <style>
-  .pagetop {
-    /* display: none; */
-    padding: 40px 10px;
-    background-color: #d8d8d8;
-    color: #000;
-    text-decoration: none;
-    border-radius: 50%;
-    position: fixed;
-    bottom: 10px;
-    right: 50px;
-  }
-</style>   -->
 @section('content')
 <div class="container">
   <p class="mb-0">場所で探す（県・市名を入力してください）</p>
